@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorate="~{layout/layout}">
+<head th:replace="layout/layout :: head">
+    <meta charset="ISO-8859-1">
+    <title></title>
+</head>
+<body>
+
+    <!-- page content -->
+    <div class="right_col" layout:fragment="page-content" role="main">
+        Hola Bienvenido
+    </div>
+    <!-- /page content -->
+    <th:block layout:fragment="page-scripts">
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    </th:block>
+
+    
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+<head th:replace="layout/layout :: head">
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+<!-- page content -->
+<div class="right_col" layout:fragment="page-content" role="main">
+  <div class="row">
+    <div class="col-12">
+      <form th:action="@{/producto/save}" th:object="${producto}" method="post">
+        <div class="card">
+          <div class="card-header">
+            <h3>Crear Producto</h3>
+          </div>
+          <div class="card-body">
+            <div class="form-group d-none">
+              <label for="">ID</label>
+              <input type="text" th:field="*{id}" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="">Nombre</label>
+              <input type="text" th:field="*{nombre}" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label for="">Precio</label>
+              <input type="text" th:field="*{precio}" class="form-control" required>
+              <p class="text-red" th:if="${#fields.hasErrors('precio')}" th:errors="*{precio}"></p>
+            </div>
+            <div class="form-group">
+              <label for="">Stock</label>
+              <input type="number" th:field="*{stock}" class="form-control" required>
+            </div>
+          </div>
+          <div class="card-footer">
+            <input type="submit" value="Guardar" class="btn btn-info">
+            <a th:href="@{/producto/listar}" class="btn btn-secondary">Volver</a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- /page content -->
+<!-- <div class="container mt-4">
+
+</div> -->
+
+<th:block layout:fragment="page-scripts">
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</th:block>
+</body>
+</html>
