@@ -93,7 +93,7 @@
             
           </div>
           <div class="card-footer">
-            <input th:if="${not size}" type="submit" value="Guardar" class="btn btn-info">
+            <input th:if="${not size}" type="submit" id="idGuardar" value="Guardar" class="btn btn-info" disabled>
             <a th:href="@{/venta/listar}" class="btn btn-secondary">Volver</a>
           </div>
         </div>
@@ -156,6 +156,7 @@
     let arrayProctuctos=[];
 
     const agregarTabla = ()=>{
+    
       vectorPro = document.getElementById('productoSelected').value.split('_');
       let cantidadSelected =  document.getElementById('cantidadSelected').value
       console.log(cantidadSelected);
@@ -189,6 +190,7 @@
         fila +='</tr>';                    
         document.getElementById('tableProductos').innerHTML += fila;
         actualizarMontos();
+        disabledButon();
       }     
      
     }
@@ -222,6 +224,7 @@
       index = arrayProctuctos.indexOf(i);
       arrayProctuctos.splice(index,1);
       actualizarMontos();
+      disabledButon();
     }
 
     const existeProducto = (producto, vector) => {
@@ -231,6 +234,14 @@
         }
       }
       return false;
+    }
+    
+    const disabledButon = () => {
+    	if(arrayProctuctos.length > 0){
+    		document.getElementById("idGuardar").disabled = false;
+    	}else{
+    		document.getElementById("idGuardar").disabled = true;
+    	}
     }
 
   </script>
