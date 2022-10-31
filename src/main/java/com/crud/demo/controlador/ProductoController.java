@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -36,12 +37,14 @@ public class ProductoController {
     }
 
     @PostMapping("/save")
-    public String save(@Valid @ModelAttribute("producto") Producto producto, BindingResult result, Model model){
+    public String save(@Valid @ModelAttribute("producto") Producto producto, BindingResult result, Model model, RedirectAttributes redirect){
         model.addAttribute("producto", producto);
     	if (result.hasErrors()) {
 			return "producto/form";
 		}
     	productoService.save(producto);
+        redirect.addFlashAttribute("mensaje", "Agregado correctamente")
+                .addFlashAttribute("clase", "success");
         return "redirect:/producto/listar";
     }
 
@@ -53,8 +56,10 @@ public class ProductoController {
     }
 
     @GetMapping("/eliminar/{id}")
-    public String delete(Model model, @PathVariable("id") Long id){
+    public String delete(Model model, @PathVariable("id") Long id, RedirectAttributes redirect){
         productoService.delete(id);
+        redirect.addFlashAttribute("mensaje", "Eliminado correctamente")
+                .addFlashAttribute("clase", "warning");
         return "redirect:/producto/listar";
     }
 }

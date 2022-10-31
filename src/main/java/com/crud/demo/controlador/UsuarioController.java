@@ -1,12 +1,16 @@
 package com.crud.demo.controlador;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.crud.demo.controlador.dto.UsuarioRegistro;
+import com.crud.demo.modelo.Usuario;
 import com.crud.demo.servicio.RUsuarioService;
 
 @Controller
@@ -34,4 +38,11 @@ public class UsuarioController {
         service.guardar(user);
         return "redirect:/registro?exito";
     }
+
+	@GetMapping("listar")
+	public String listarUser(Model model){
+		List<Usuario>users = service.listar();
+		model.addAttribute("users", users);
+		return "usuario/listar";
+	}
 }

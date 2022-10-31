@@ -12,4 +12,8 @@ public interface RUsuarioService extends UserDetailsService{
 	public Usuario guardar(UsuarioRegistro userR);
 	
 	public List<Usuario> listar();
+
+	public Usuario getUsuario(Long id);
+	
+	public Usuario getUsuarioByEmail(String username);
 }

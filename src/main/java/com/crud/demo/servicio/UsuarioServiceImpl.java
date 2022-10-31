@@ -56,4 +56,14 @@ public class UsuarioServiceImpl implements RUsuarioService {
 		return userRepo.findAll();
 	}
 
+	@Override
+	public Usuario getUsuario(Long id) {
+		return userRepo.findById(id).get();
+	}
+
+	@Override
+	public Usuario getUsuarioByEmail(String username) {
+		return userRepo.findByEmail(username);
+	}
+
 }

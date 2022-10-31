@@ -14,7 +14,7 @@ layout:decorate="~{layout/layout}">
         
 
         <div sec:authorize="hasRole('ROLE_ADMIN')">
-            <a th:href="@{/producto/new}" class="btn btn-info">Nuevo</a>
+            <a th:href="@{/registro/new}" class="btn btn-info">Nuevo</a>
         </div>
         
         <div class="alert" th:classappend="'alert-' + (${clase != null} ? ${clase} : info)" th:if="${mensaje != null}"
@@ -29,21 +29,19 @@ layout:decorate="~{layout/layout}">
             <thead>
             <tr>
                 <td>ID</td>
-                <td>NOMBRES</td>
-                <td>PRECIO</td>
-                <td>STOCK</td>
+                <td>NOMBRES Y APELLIDOS</td>
+                <td>EMAIL</td>
                 <td>ACCIONES</td>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="producto:${productos}">
-                <td th:text="${producto.id}"></td>
-                <td th:text="${producto.nombre}"></td>
-                <td th:text="${producto.precio}"></td>
-                <td th:text="${producto.stock}"></td>
+            <tr th:each="user:${users}">
+                <td th:text="${user.id}"></td>
+                <td th:text="${user.nombre + user.apellido}"></td>
+                <td th:text="${user.email}"></td>
                 <td sec:authorize="hasRole('ROLE_ADMIN')">
-                    <a th:href="@{/producto/editar/}+${producto.id}" class="btn btn-sm btn-info"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                    <a th:href="@{/producto/eliminar/}+${producto.id}" class="btn btn-sm btn-danger"> <i class="fa fa-trash" aria-hidden="true"></i></a>
+                    <a th:href="@{/registro/editar/}+${user.id}" class="btn btn-sm btn-info"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                    <a th:href="@{/registro/eliminar/}+${user.id}" class="btn btn-sm btn-danger"> <i class="fa fa-trash" aria-hidden="true"></i></a>
                 </td>
             </tr>
             </tbody>

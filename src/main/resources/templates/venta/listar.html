@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+<head th:replace="layout/layout :: head">
+  <meta charset="ISO-8859-1">
+  <title></title>
+</head>
+<body>
+
+<!-- page content -->
+<div class="right_col" layout:fragment="page-content" role="main">
+
+  <div clas="alert" th:classappend="'alert-' + (${clase != null} ? ${clase} : info)" th:if="${mensaje != null}"
+       th:text="${mensaje}">
+
+  </div>
+
+  <a th:href="@{/venta/new}" class="btn btn-info"><i class="fa fa-plus" aria-hidden="true"></i> Nuevo</a>
+
+  <br><br>
+  <table class="table">
+    <thead>
+    <tr>
+      <td>ID</td>
+      <td>Fecha</td>
+      <td>Usuario</td>
+      <td>SubTotal</td>
+      <td>Total</td>
+      <td>ACCIONES</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="venta:${ventas}">
+      <td th:text="${venta.id}"></td>
+      <td th:text="${venta.fecha}"></td>
+      <td th:text="${venta.usuario.email}"></td>
+      <td th:text="${venta.getSubTotal()}"></td>
+      <td th:text="${venta.getTotal()}"></td>
+      <td sec:authorize="hasRole('ROLE_ADMIN')">
+        <a th:href="@{/venta/editar/}+${venta.id}" class="btn btn-sm btn-info"><i class="fa fa-eye" aria-hidden="true"></i> Ver mas</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<!-- /page content -->
+<th:block layout:fragment="page-scripts">
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</th:block>
+
+
+</body>
+</html>
